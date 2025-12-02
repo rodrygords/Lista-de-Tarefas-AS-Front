@@ -1,0 +1,232 @@
+/* style.css - Código completo */
+
+:root {
+    --cor-alta: #dc3545; /* Vermelho */
+    --cor-media: #ffc107; /* Amarelo */
+    --cor-baixa: #28a745; /* Verde */
+    --cor-fundo: #ecf0f1;
+    --cor-card: #ffffff;
+    --sombra-leve: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Fundo gradiente */
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+h2 {
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 25px;
+}
+
+/* --- Legenda de Prioridades --- */
+.legenda {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.legenda-cor {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.cor-alta { background-color: var(--cor-alta); }
+.cor-media { background-color: var(--cor-media); }
+.cor-baixa { background-color: var(--cor-baixa); }
+
+/* --- Formulário de Adição --- */
+.form-adicionar {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.prioridade-opcoes {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.radio-opcao {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Botões genéricos */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+    color: white;
+}
+
+.btn-adicionar {
+    background-color: #007bff;
+    width: 100%;
+    font-size: 1.1em;
+}
+
+.btn-adicionar:hover {
+    background-color: #0056b3;
+}
+
+/* --- Lista de Tarefas --- */
+.lista-tarefas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.vazio {
+    text-align: center;
+    padding: 25px;
+    color: #888;
+    background-color: var(--cor-card);
+    border-radius: 10px;
+    box-shadow: var(--sombra-leve);
+}
+
+/* --- Item de Tarefa (Card) --- */
+/* Note que no JS enviado, a classe principal é `.tarefa`, não `.tarefa-item`. 
+   Vou usar `.tarefa` para compatibilidade com o seu JS. */
+.tarefa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--cor-card);
+    border-radius: 10px;
+    box-shadow: var(--sombra-leve);
+    border-left: 6px solid transparent; 
+    transition: transform 0.2s;
+}
+
+.tarefa:hover {
+    transform: translateY(-2px);
+}
+
+/* Classes de prioridade para a borda esquerda */
+.tarefa-alta { border-left-color: var(--cor-alta); }
+.tarefa-media { border-left-color: var(--cor-media); }
+.tarefa-baixa { border-left-color: var(--cor-baixa); }
+
+.tarefa-info {
+    flex-grow: 1;
+}
+
+.tarefa-nome {
+    font-weight: bold;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.tarefa-prioridade {
+    font-size: 0.8em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: white;
+}
+
+/* Cores de fundo para o span de prioridade */
+.prioridade-alta { background-color: var(--cor-alta); }
+.prioridade-media { background-color: var(--cor-media); }
+.prioridade-baixa { background-color: var(--cor-baixa); }
+
+.tarefa-data {
+    display: block;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 8px;
+}
+
+.tarefa-acoes {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.btn-concluir {
+    background-color: var(--cor-baixa);
+}
+
+.btn-excluir {
+    background-color: var(--cor-alta);
+}
+
+/* Estilo para tarefas concluídas */
+.tarefa-concluida .tarefa-nome {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.tarefa-concluida .tarefa-prioridade {
+    opacity: 0.7;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas Interativa</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>📝 Lista de Tarefas</h1>
+
+        <!-- Legenda de Prioridades -->
+        <div class="legenda">
+            <div class="legenda-item">
+                <div class="legenda-cor cor-alta"></div>
+                <span>Alta Prioridade</span>
+            </div>
+            <div class="legenda-item">
+                <div class="legenda-cor cor-media"></div>
+                <span>Média Prioridade</span>
+            </div>
+            <div class="legenda-item">
+                <div class="legenda-cor cor-baixa"></div>
+                <span>Baixa Prioridade</span>
+            </div>
+        </div>
+
+        <!-- Formulário de Adição -->
+        <div class="form-adicionar">
+            <div class="form-group">
+                <label for="nomeTarefa">Nome da Tarefa:</label>
+                <input type="text" id="nomeTarefa" placeholder="Digite a tarefa...">
+            </div>
+
+            <div class="form-group">
+                <label>Prioridade:</label>
+                <div class="prioridade-opcoes">
+                    <div class="radio-opcao">
+                        <input type="radio" id="alta" name="prioridade" value="alta">
+                        <label for="alta">Alta</label>
+                    </div>
+                    <div class="radio-opcao">
+                        <input type="radio" id="media" name="prioridade" value="media" checked>
+                        <label for="media">Média</label>
+                    </div>
+                    <div class="radio-opcao">
+                        <input type="radio" id="baixa" name="prioridade" value="baixa">
+                        <label for="baixa">Baixa</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-adicionar" id="btnAdicionar">Adicionar Tarefa</button>
+        </div>
+
+        <!-- Tarefas Pendentes -->
+        <div class="secao">
+            <h2>⏳ Tarefas Pendentes</h2>
+            <div class="lista-tarefas" id="listaPendentes">
+                <div class="vazio">Nenhuma tarefa pendente</div>
+            </div>
+        </div>
+
+        <!-- Histórico de Concluídas -->
+        <div class="secao">
+            <h2>✅ Tarefas Concluídas</h2>
+            <div class="lista-tarefas" id="listaConcluidas">
+                <div class="vazio">Nenhuma tarefa concluída</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
