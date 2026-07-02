@@ -1,58 +1,97 @@
-# Documentação - Lista de Tarefas Interativa
+# Lista de Tarefas Interativa
 
-**Aluno:** [Rodrygo de Souza]
-**Disciplina:** Desenvolvimento Web  
-**Data:** 30/11/2025
+Uma aplicação web de lista de tarefas interativa, desenvolvida com **HTML, CSS e JavaScript puro**. O projeto permite organizar atividades por prioridade, acompanhar tarefas pendentes e manter um histórico das tarefas concluídas diretamente no navegador.
 
----
+## Funcionalidades
 
-## 1. Estrutura do Projeto
+- Adição de tarefas pelo botão da interface ou pela tecla `Enter`;
+- classificação por prioridade alta, média ou baixa;
+- identificação visual das prioridades por cores;
+- validação para impedir o cadastro de tarefas sem nome;
+- separação entre tarefas pendentes e concluídas;
+- registro da data e da hora de conclusão;
+- exclusão de tarefas pendentes ou concluídas;
+- mensagens de estado quando uma lista não possui tarefas.
 
-### 1.1 Arquivos e Pastas
+> As tarefas são mantidas apenas durante a sessão atual. Ao recarregar a página, as listas retornam ao estado inicial.
 
-O projeto é composto por três arquivos principais:
+## Tecnologias utilizadas
 
-- **index.html** - Estrutura HTML da aplicação
-- **style.css** - Estilos e layout visual
-- **script.js** - Lógica JavaScript e manipulação do DOM
+- **HTML5:** estrutura e elementos da interface;
+- **CSS3:** layout, cores, estados visuais e estilização responsiva;
+- **JavaScript:** interatividade, validação e manipulação dinâmica do DOM.
 
-### 1.2 Descrição das Seções da Página
+O projeto não utiliza frameworks ou dependências externas.
 
-A aplicação está organizada nas seguintes seções:
+## Como executar localmente
 
-1. **Cabeçalho** - Título da aplicação "📝 Lista de Tarefas"
+Por ser um projeto estático, não é necessário instalar dependências.
 
-2. **Legenda de Prioridades** - Exibe visualmente as três categorias de prioridade:
-   - Alta (vermelho)
-   - Média (amarelo)
-   - Baixa (verde)
+1. Clone este repositório:
 
-3. **Formulário de Adição** - Permite ao usuário:
-   - Digitar o nome da tarefa
-   - Selecionar a prioridade (radio buttons)
-   - Adicionar a tarefa através do botão "Adicionar Tarefa"
+   ```bash
+   git clone https://github.com/rodrygords/Lista-de-Tarefas-AS-Front.git
+   ```
 
-4. **Tarefas Pendentes** - Lista todas as tarefas que ainda não foram concluídas, com opções para:
-   - Concluir tarefa
-   - Excluir tarefa
+2. Acesse a pasta do projeto:
 
-5. **Tarefas Concluídas** - Histórico de tarefas finalizadas, mostrando:
-   - Nome da tarefa
-   - Prioridade
-   - Data e hora da conclusão
-   - Opção de excluir do histórico
+   ```bash
+   cd Lista-de-Tarefas-AS-Front
+   ```
 
----
+3. Abra o arquivo `index.html` em um navegador.
 
-## 2. Explicação dos Métodos e Conceitos de DOM Utilizados
+Se preferir executar com um servidor local e tiver Python instalado, use:
 
-### 2.1 Métodos para Seleção de Elementos
+```bash
+python3 -m http.server 8000
+```
+
+Depois, acesse `http://localhost:8000` no navegador.
+
+## Estrutura do projeto
+
+```text
+.
+├── index.html
+├── style.css
+├── script.js
+├── documentação final asfront.pdf
+└── README.md
+```
+
+- `index.html`: estrutura da aplicação;
+- `style.css`: apresentação visual e layout;
+- `script.js`: comportamento da lista e manipulação do DOM;
+- `documentação final asfront.pdf`: documentação acadêmica complementar.
+
+## Como a aplicação funciona
+
+1. O usuário informa o nome da tarefa e seleciona uma prioridade.
+2. Ao adicionar, o JavaScript valida o campo e cria os elementos da tarefa dinamicamente.
+3. A tarefa é exibida na lista de pendentes com a identificação visual da prioridade.
+4. Ao concluir, ela é removida das pendentes e recriada no histórico com data e hora.
+5. As tarefas podem ser excluídas de qualquer uma das listas.
+
+## Conceitos praticados
+
+O desenvolvimento deste projeto exercita fundamentos de front-end, entre eles:
+
+- separação de responsabilidades entre HTML, CSS e JavaScript;
+- seleção, criação e remoção de elementos do DOM;
+- tratamento de eventos de clique e teclado;
+- validação de entrada de dados;
+- aplicação dinâmica de classes CSS;
+- organização do código em funções;
+- uso de closures em funções associadas a eventos;
+- formatação de data e hora para o padrão brasileiro;
+- controle dos estados vazios das listas.
+
+### Seleção de elementos
 
 #### `document.getElementById()`
 
-**O que é:** Método que seleciona um único elemento HTML através do seu atributo `id`.
-
-**Como utilizei:** Usei para selecionar os elementos principais da aplicação:
+Seleciona um elemento HTML por seu atributo `id`. No projeto, é utilizado para acessar os principais elementos da interface:
 
 ```javascript
 const nomeTarefaInput = document.getElementById('nomeTarefa');
@@ -61,44 +100,33 @@ const listaPendentes = document.getElementById('listaPendentes');
 const listaConcluidas = document.getElementById('listaConcluidas');
 ```
 
-**Por que usei:** É o método mais eficiente para selecionar elementos únicos que possuem um ID específico.
-
----
+Esse método é adequado para elementos únicos que possuem um identificador específico.
 
 #### `document.querySelector()`
 
-**O que é:** Método que seleciona o **primeiro** elemento que corresponde a um seletor CSS.
-
-**Como utilizei:** Usei para encontrar qual botão de rádio (prioridade) está selecionado:
+Seleciona o primeiro elemento correspondente a um seletor CSS. Ele identifica qual opção de prioridade está marcada:
 
 ```javascript
-const prioridadeSelecionada = document.querySelector('input[name="prioridade"]:checked');
+const prioridadeSelecionada = document.querySelector(
+    'input[name="prioridade"]:checked'
+);
 ```
 
-**Por que usei:** Permite usar seletores CSS complexos, como `[name="prioridade"]:checked`, que seleciona apenas o input de rádio que está marcado.
-
----
+Também é usado para localizar mensagens de lista vazia dentro de cada seção.
 
 #### `document.querySelectorAll()`
 
-**O que é:** Método que seleciona **todos** os elementos que correspondem a um seletor CSS, retornando uma NodeList.
+Seleciona todos os elementos que correspondem a um seletor CSS e retorna uma `NodeList`. Não foi necessário na implementação atual, mas foi estudado como alternativa para trabalhar com vários elementos:
 
-**Como utilizei:** Embora não tenha usado diretamente neste projeto, este método seria útil se precisássemos selecionar múltiplos elementos, como todas as tarefas de uma vez.
-
-**Exemplo de uso possível:**
 ```javascript
 const todasTarefas = document.querySelectorAll('.tarefa');
 ```
 
----
-
-### 2.2 Métodos de Criação e Manipulação
+### Criação e montagem de elementos
 
 #### `document.createElement()`
 
-**O que é:** Cria um novo elemento HTML dinamicamente.
-
-**Como utilizei:** Usei extensivamente para criar todos os elementos das tarefas:
+Cria novos elementos HTML por JavaScript. As tarefas e seus controles são construídos dinamicamente:
 
 ```javascript
 const tarefaDiv = document.createElement('div');
@@ -109,15 +137,9 @@ const btnConcluir = document.createElement('button');
 const btnExcluir = document.createElement('button');
 ```
 
-**Por que usei:** É fundamental para criar elementos dinamicamente sem precisar escrever HTML diretamente no JavaScript.
-
----
-
 #### `element.appendChild()`
 
-**O que é:** Adiciona um elemento filho ao final de um elemento pai.
-
-**Como utilizei:** Usei para montar a estrutura hierárquica das tarefas:
+Adiciona um elemento filho ao final de um elemento pai. O método monta a hierarquia de cada tarefa e a insere na lista correspondente:
 
 ```javascript
 tarefaInfo.appendChild(tarefaNome);
@@ -129,387 +151,134 @@ tarefaDiv.appendChild(tarefaAcoes);
 listaPendentes.appendChild(tarefaElement);
 ```
 
-**Por que usei:** Permite construir elementos complexos adicionando elementos filhos de forma organizada.
+### Classes e conteúdo
 
----
+#### `element.classList.add()`
 
-#### `element.classList.add()`, `remove()`, `toggle()`
-
-**O que são:** Métodos para manipular as classes CSS de um elemento.
-
-- **add()** - Adiciona uma ou mais classes
-- **remove()** - Remove uma ou mais classes
-- **toggle()** - Alterna uma classe (adiciona se não existir, remove se existir)
-
-**Como utilizei:**
+Adiciona classes CSS aos elementos criados. Classes formadas a partir da prioridade conectam o comportamento do JavaScript aos estilos definidos no CSS:
 
 ```javascript
 tarefaDiv.classList.add('tarefa', `tarefa-${prioridade}`);
 tarefaNome.classList.add('tarefa-nome');
-tarefaPrioridade.classList.add('tarefa-prioridade', `prioridade-${prioridade}`);
+tarefaPrioridade.classList.add(
+    'tarefa-prioridade',
+    `prioridade-${prioridade}`
+);
 btnConcluir.classList.add('btn', 'btn-concluir');
 ```
 
-**Por que usei:** Permite aplicar estilos CSS dinamicamente aos elementos criados, mantendo a separação entre estrutura (HTML), apresentação (CSS) e comportamento (JavaScript).
-
----
-
-### 2.3 Alteração de Conteúdo
+Os métodos `classList.remove()` e `classList.toggle()` também permitem remover e alternar classes, embora não sejam necessários na implementação atual.
 
 #### `element.textContent`
 
-**O que é:** Propriedade que define ou retorna o conteúdo de texto de um elemento.
-
-**Como utilizei:** Usei para definir o texto dos elementos:
+Define o texto de um elemento sem interpretar marcação HTML:
 
 ```javascript
 tarefaNome.textContent = nome;
-tarefaPrioridade.textContent = `Prioridade: ${prioridade.charAt(0).toUpperCase() + prioridade.slice(1)}`;
+tarefaPrioridade.textContent =
+    `Prioridade: ${prioridade.charAt(0).toUpperCase() + prioridade.slice(1)}`;
 btnConcluir.textContent = 'Concluir';
 btnExcluir.textContent = 'Excluir';
-msgVazio.textContent = 'Nenhuma tarefa pendente';
-tarefaData.textContent = `Concluída em: ${dataFormatada}`;
 ```
 
-**Por que usei:** É mais seguro que `innerHTML` quando trabalhamos apenas com texto, pois não interpreta HTML, evitando problemas de segurança (XSS).
+Para este caso, `textContent` é mais apropriado que `innerHTML`, pois o conteúdo inserido é apenas texto. `innerHTML`, que interpreta tags HTML, não é utilizado no projeto.
 
----
-
-#### `element.innerHTML`
-
-**O que é:** Propriedade que define ou retorna o conteúdo HTML de um elemento.
-
-**Como utilizei:** Não utilizei diretamente neste projeto, pois trabalhei apenas com texto simples.
-
-**Diferença do textContent:** O `innerHTML` interpreta tags HTML, enquanto `textContent` trata tudo como texto puro.
-
----
-
-### 2.4 Manipulação de Eventos
+### Eventos e interatividade
 
 #### `element.addEventListener()`
 
-**O que é:** Método que registra um "ouvinte" de eventos em um elemento, executando uma função quando o evento ocorre.
-
-**Como utilizei:** Usei para capturar interações do usuário:
+Registra uma função que deve ser executada quando um evento acontece. A aplicação responde a cliques nos botões e ao pressionamento da tecla `Enter`:
 
 ```javascript
-// Evento de clique no botão adicionar
 btnAdicionar.addEventListener('click', adicionarTarefa);
 
-// Evento de pressionar Enter no campo de texto
 nomeTarefaInput.addEventListener('keypress', function (event) {
     if (event.key === 'Enter') {
         adicionarTarefa();
     }
 });
 
-// Evento de clique no botão concluir
 btnConcluir.addEventListener('click', function () {
     concluirTarefa(tarefaDiv, nome, prioridade);
 });
 
-// Evento de clique no botão excluir
 btnExcluir.addEventListener('click', function () {
     excluirTarefa(tarefaDiv);
 });
 ```
 
-**Eventos utilizados:**
-- **click** - Detecta cliques do mouse
-- **keypress** - Detecta quando uma tecla é pressionada
+As funções anônimas associadas aos botões mantêm acesso aos dados da tarefa por meio de closures.
 
-**Por que usei:** Permite criar interatividade, respondendo às ações do usuário de forma dinâmica.
-
----
-
-### 2.5 Manipulação de Estilos
-
-#### `element.style`
-
-**O que é:** Propriedade que permite acessar e modificar os estilos CSS inline de um elemento.
-
-**Como utilizei:** Neste projeto, optei por usar classes CSS ao invés de manipular estilos diretamente via JavaScript, pois é uma prática melhor de organização.
-
-**Exemplo de como poderia ser usado:**
-```javascript
-tarefaDiv.style.backgroundColor = 'red';
-tarefaDiv.style.fontSize = '18px';
-```
-
-**Por que preferi usar classes:** Usar `classList.add()` mantém os estilos no CSS, facilitando manutenção e reutilização.
-
----
-
-### 2.6 Remoção e Movimentação
+### Remoção e mudança de estado
 
 #### `element.remove()`
 
-**O que é:** Método que remove um elemento do DOM.
-
-**Como utilizei:** Usei para excluir tarefas e remover mensagens de "lista vazia":
+Remove um elemento da árvore do DOM. O projeto utiliza esse recurso para excluir tarefas e retirar as mensagens de lista vazia quando necessário:
 
 ```javascript
-// Remover tarefa
 tarefaElement.remove();
-
-// Remover mensagem de vazio
 msgVazio.remove();
-
-// Remover tarefa concluída
 tarefaConcluida.remove();
 ```
 
-**Por que usei:** É a forma mais simples e direta de remover elementos do DOM.
+Após uma remoção, a quantidade de filhos da lista é verificada para decidir se a mensagem de estado vazio deve voltar a ser exibida.
 
----
+#### Passagem de pendente para concluída
 
-#### Remoção do DOM
+A tarefa não é apenas movida entre os contêineres. A implementação:
 
-**Como funciona:** Quando chamamos `element.remove()`, o elemento é completamente removido da árvore do DOM e não é mais renderizado na página.
-
-**Cuidados:** Após remover um elemento, é importante verificar se a lista ficou vazia para exibir a mensagem apropriada.
-
----
-
-#### Movimentação entre listas (pendentes → concluídas)
-
-**Como implementei:** A movimentação não é literal - na verdade, eu:
-
-1. **Removo** a tarefa da lista de pendentes usando `remove()`
-2. **Crio um novo elemento** para a tarefa concluída com informações adicionais (data/hora)
-3. **Adiciono** esse novo elemento à lista de concluídas usando `appendChild()`
+1. remove o elemento da lista de pendentes;
+2. cria um novo elemento com as informações da tarefa;
+3. acrescenta a data e a hora da conclusão;
+4. adiciona o novo elemento à lista de concluídas.
 
 ```javascript
 function concluirTarefa(tarefaElement, nome, prioridade) {
-    // 1. Remover da lista de pendentes
     tarefaElement.remove();
-    
-    // 2. Criar novo elemento com data/hora
+
     const tarefaConcluida = document.createElement('div');
-    // ... adicionar informações e data/hora
-    
-    // 3. Adicionar à lista de concluídas
+    // Cria as informações e registra a data e a hora.
+
     listaConcluidas.appendChild(tarefaConcluida);
 }
 ```
 
-**Por que fiz assim:** Permite adicionar informações extras (data/hora de conclusão) e manter estruturas diferentes entre tarefas pendentes e concluídas.
+Essa abordagem permite que a versão concluída tenha informações e ações diferentes da versão pendente.
 
----
+### Validação de entrada
 
-## 3. Fluxo de Funcionamento da Aplicação
+Antes de criar uma tarefa, o valor digitado é limpo com `trim()` e validado:
 
-### 3.1 Como uma tarefa é criada
-
-**Passo 1:** Usuário digita o nome da tarefa no campo de texto (`<input id="nomeTarefa">`)
-
-**Passo 2:** Usuário seleciona a prioridade através dos radio buttons (Alta, Média ou Baixa)
-
-**Passo 3:** Usuário clica no botão "Adicionar Tarefa" ou pressiona Enter
-
-**Passo 4:** O evento `click` ou `keypress` dispara a função `adicionarTarefa()`
-
-**Passo 5:** A função valida se o campo não está vazio:
 ```javascript
+const nome = nomeTarefaInput.value.trim();
+
 if (nome === '') {
     alert('Por favor, digite o nome da tarefa!');
     return;
 }
 ```
 
-**Passo 6:** A função `obterPrioridade()` identifica qual radio button está marcado
+Com isso, entradas vazias ou compostas somente por espaços não são adicionadas.
 
-**Passo 7:** A função `criarTarefa(nome, prioridade)` é chamada e cria toda a estrutura HTML da tarefa usando `createElement()` e `appendChild()`
+### Datas e localização
 
-**Passo 8:** Classes CSS são aplicadas dinamicamente usando `classList.add()` para estilizar a tarefa conforme a prioridade
-
-**Passo 9:** Event listeners são adicionados aos botões "Concluir" e "Excluir"
-
----
-
-### 3.2 Como aparece na lista de pendentes
-
-**Passo 1:** Verifica se existe a mensagem "Nenhuma tarefa pendente" e a remove se existir:
-```javascript
-const msgVazio = listaPendentes.querySelector('.vazio');
-if (msgVazio) {
-    msgVazio.remove();
-}
-```
-
-**Passo 2:** O elemento da tarefa criado é adicionado à lista de pendentes:
-```javascript
-listaPendentes.appendChild(tarefaElement);
-```
-
-**Passo 3:** O campo de entrada é limpo e recebe foco novamente:
-```javascript
-nomeTarefaInput.value = '';
-nomeTarefaInput.focus();
-```
-
-**Resultado visual:** A tarefa aparece na seção "⏳ Tarefas Pendentes" com:
-- Nome da tarefa
-- Badge de prioridade colorido
-- Borda lateral colorida conforme prioridade
-- Botões "Concluir" e "Excluir"
-
----
-
-### 3.3 Como é marcada como concluída
-
-**Passo 1:** Usuário clica no botão "Concluir" da tarefa
-
-**Passo 2:** O evento `click` dispara a função `concluirTarefa(tarefaDiv, nome, prioridade)`
-
-**Passo 3:** A tarefa é removida da lista de pendentes:
-```javascript
-tarefaElement.remove();
-```
-
-**Passo 4:** Verifica se a lista de pendentes ficou vazia e adiciona mensagem se necessário
-
-**Passo 5:** Remove a mensagem "Nenhuma tarefa concluída" da lista de concluídas se existir
-
-**Passo 6:** Cria um novo elemento de tarefa concluída com:
-- Nome da tarefa
-- Prioridade
-- **Data e hora da conclusão** (usando `new Date()` e `toLocaleString('pt-BR')`)
+Ao concluir uma tarefa, a aplicação cria uma data e a formata para o padrão brasileiro:
 
 ```javascript
 const dataHora = new Date();
 const dataFormatada = dataHora.toLocaleString('pt-BR');
-tarefaData.textContent = `Concluída em: ${dataFormatada}`;
 ```
 
-**Passo 7:** Adiciona classe `tarefa-concluida` para aplicar opacidade reduzida
+### Separação entre comportamento e apresentação
 
-**Passo 8:** Adiciona apenas o botão "Excluir" (sem botão "Concluir")
+Os estilos não são modificados diretamente com `element.style`. Em vez disso, o JavaScript aplica classes, enquanto as regras visuais permanecem no arquivo CSS. Essa separação facilita a leitura e a manutenção do projeto.
 
-**Passo 9:** Adiciona a tarefa concluída à lista de concluídas:
-```javascript
-listaConcluidas.appendChild(tarefaConcluida);
-```
+## Aprendizados
 
----
+O projeto ajudou a consolidar a criação de interfaces dinâmicas sem frameworks. Os principais desafios envolveram montar corretamente elementos aninhados, sincronizar as mensagens de listas vazias, transportar os dados de cada tarefa para os eventos e aplicar estilos conforme a prioridade selecionada.
 
-### 3.4 Como é excluída
+As soluções adotadas reforçaram o uso de funções com responsabilidades definidas, classes CSS dinâmicas, closures e verificações do estado atual do DOM.
 
-#### Exclusão de tarefa pendente:
+## Autor
 
-**Passo 1:** Usuário clica no botão "Excluir" da tarefa pendente
-
-**Passo 2:** O evento `click` dispara a função `excluirTarefa(tarefaElement)`
-
-**Passo 3:** A tarefa é removida do DOM:
-```javascript
-tarefaElement.remove();
-```
-
-**Passo 4:** Verifica se a lista de pendentes ficou vazia:
-```javascript
-if (listaPendentes.children.length === 0) {
-    // Cria e adiciona mensagem "Nenhuma tarefa pendente"
-}
-```
-
-#### Exclusão de tarefa concluída:
-
-**Passo 1:** Usuário clica no botão "Excluir" da tarefa concluída
-
-**Passo 2:** O evento `click` dispara uma função anônima que remove a tarefa:
-```javascript
-btnExcluir.addEventListener('click', function () {
-    tarefaConcluida.remove();
-    
-    if (listaConcluidas.children.length === 0) {
-        // Adiciona mensagem "Nenhuma tarefa concluída"
-    }
-});
-```
-
-**Resultado:** A tarefa desaparece completamente da interface
-
----
-
-## 4. Considerações Finais
-
-### 4.1 O que aprendi
-
-Durante o desenvolvimento deste projeto, aprendi diversos conceitos importantes:
-
-1. **Manipulação do DOM:** Compreendi como o JavaScript pode criar, modificar e remover elementos HTML dinamicamente, tornando a página interativa sem precisar recarregar.
-
-2. **Separação de responsabilidades:** Entendi a importância de manter HTML (estrutura), CSS (apresentação) e JavaScript (comportamento) separados e organizados.
-
-3. **Event Listeners:** Aprendi como capturar e responder a eventos do usuário, criando uma experiência interativa.
-
-4. **Criação dinâmica de elementos:** Dominei o processo de criar elementos complexos usando `createElement()`, `appendChild()` e `classList`, construindo estruturas HTML através de código.
-
-5. **Gerenciamento de estado:** Aprendi a gerenciar o estado da aplicação, como verificar se listas estão vazias e exibir mensagens apropriadas.
-
-6. **Formatação de datas:** Utilizei o objeto `Date` do JavaScript para registrar data e hora de conclusão das tarefas.
-
-7. **Validação de entrada:** Implementei validação simples para garantir que o usuário não adicione tarefas vazias.
-
----
-
-### 4.2 Desafios encontrados
-
-1. **Estrutura de elementos aninhados:** No início, foi desafiador entender a ordem correta de criar e adicionar elementos filhos para montar a estrutura completa da tarefa.
-
-   **Solução:** Organizei o código em etapas claras, criando primeiro os elementos internos e depois os adicionando aos containers.
-
-2. **Gerenciamento de mensagens "vazio":** Foi necessário sempre verificar se a lista estava vazia para adicionar/remover a mensagem apropriada.
-
-   **Solução:** Criei verificações consistentes usando `children.length === 0` após cada operação de adicionar/remover.
-
-3. **Passagem de informações entre funções:** Precisei passar o nome e prioridade da tarefa para a função de conclusão.
-
-   **Solução:** Utilizei closures e funções anônimas nos event listeners para capturar as variáveis necessárias.
-
-4. **Aplicação de estilos dinâmicos:** Precisei aplicar classes CSS diferentes baseadas na prioridade selecionada.
-
-   **Solução:** Usei template literals para criar nomes de classes dinâmicos: `` `tarefa-${prioridade}` ``
-
-5. **Formatação de data em português:** Precisei exibir a data no formato brasileiro.
-
-   **Solução:** Utilizei `toLocaleString('pt-BR')` para formatar automaticamente a data e hora.
-
----
-
-### 4.3 Possíveis melhorias futuras
-
-1. **Persistência de dados:** Implementar `localStorage` para salvar as tarefas mesmo após fechar o navegador
-
-2. **Edição de tarefas:** Adicionar funcionalidade para editar o nome de tarefas existentes
-
-3. **Filtros e ordenação:** Permitir filtrar tarefas por prioridade e ordenar por data
-
-4. **Animações:** Adicionar transições suaves ao adicionar/remover tarefas
-
-5. **Contador de tarefas:** Exibir quantidade de tarefas pendentes e concluídas
-
-6. **Categorias:** Adicionar categorias além de prioridades (trabalho, pessoal, estudos, etc.)
-
----
-
-## 5. Conclusão
-
-Este projeto demonstrou de forma prática e completa os conceitos fundamentais de manipulação do DOM com JavaScript. A aplicação atende a todos os requisitos propostos:
-
-✅ Adição de tarefas com nome e prioridade  
-✅ Legenda visual de prioridades  
-✅ Listagem de tarefas pendentes  
-✅ Funcionalidade de exclusão  
-✅ Funcionalidade de conclusão  
-✅ Histórico de concluídas com data e hora  
-✅ Estilização responsiva e organizada  
-✅ Código bem estruturado e comentado  
-
-A experiência de desenvolver esta aplicação consolidou meu entendimento sobre como JavaScript pode transformar páginas estáticas em aplicações web interativas e dinâmicas.
-
----
-
-**Fim da Documentação**
+Desenvolvido por **Rodrygo de Souza** como projeto de estudo em Desenvolvimento Web.
