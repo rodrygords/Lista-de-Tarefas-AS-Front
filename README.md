@@ -5,12 +5,19 @@ Uma aplicação web de lista de tarefas interativa, desenvolvida com **HTML, CSS
 ## Funcionalidades
 
 - Adição de tarefas pelo botão da interface ou pela tecla `Enter`;
+
 - classificação por prioridade alta, média ou baixa;
+
 - identificação visual das prioridades por cores;
+
 - validação para impedir o cadastro de tarefas sem nome;
+
 - separação entre tarefas pendentes e concluídas;
+
 - registro da data e da hora de conclusão;
+
 - exclusão de tarefas pendentes ou concluídas;
+
 - mensagens de estado quando uma lista não possui tarefas.
 
 > As tarefas são mantidas apenas durante a sessão atual. Ao recarregar a página, as listas retornam ao estado inicial.
@@ -18,7 +25,9 @@ Uma aplicação web de lista de tarefas interativa, desenvolvida com **HTML, CSS
 ## Tecnologias utilizadas
 
 - **HTML5:** estrutura e elementos da interface;
+
 - **CSS3:** layout, cores, estados visuais e estilização responsiva;
+
 - **JavaScript:** interatividade, validação e manipulação dinâmica do DOM.
 
 O projeto não utiliza frameworks ou dependências externas.
@@ -61,16 +70,23 @@ Depois, acesse `http://localhost:8000` no navegador.
 ```
 
 - `index.html`: estrutura da aplicação;
+
 - `style.css`: apresentação visual e layout;
+
 - `script.js`: comportamento da lista e manipulação do DOM;
+
 - `documentação final asfront.pdf`: documentação acadêmica complementar.
 
 ## Como a aplicação funciona
 
 1. O usuário informa o nome da tarefa e seleciona uma prioridade.
+
 2. Ao adicionar, o JavaScript valida o campo e cria os elementos da tarefa dinamicamente.
+
 3. A tarefa é exibida na lista de pendentes com a identificação visual da prioridade.
+
 4. Ao concluir, ela é removida das pendentes e recriada no histórico com data e hora.
+
 5. As tarefas podem ser excluídas de qualquer uma das listas.
 
 ## Conceitos praticados
@@ -78,13 +94,21 @@ Depois, acesse `http://localhost:8000` no navegador.
 O desenvolvimento deste projeto exercita fundamentos de front-end, entre eles:
 
 - separação de responsabilidades entre HTML, CSS e JavaScript;
+
 - seleção, criação e remoção de elementos do DOM;
+
 - tratamento de eventos de clique e teclado;
+
 - validação de entrada de dados;
+
 - aplicação dinâmica de classes CSS;
+
 - organização do código em funções;
+
 - uso de closures em funções associadas a eventos;
+
 - formatação de data e hora para o padrão brasileiro;
+
 - controle dos estados vazios das listas.
 
 ### Seleção de elementos
@@ -228,8 +252,11 @@ Após uma remoção, a quantidade de filhos da lista é verificada para decidir 
 A tarefa não é apenas movida entre os contêineres. A implementação:
 
 1. remove o elemento da lista de pendentes;
+
 2. cria um novo elemento com as informações da tarefa;
+
 3. acrescenta a data e a hora da conclusão;
+
 4. adiciona o novo elemento à lista de concluídas.
 
 ```javascript
